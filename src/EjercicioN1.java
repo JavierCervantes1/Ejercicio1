@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -42,6 +45,7 @@ public class EjercicioN1 extends javax.swing.JFrame {
         txtPorce3 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtTotalC = new javax.swing.JTextField();
+        cmdBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +55,24 @@ public class EjercicioN1 extends javax.swing.JFrame {
 
         jLabel3.setText("Persona 3");
 
+        txtPerso1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPerso1KeyTyped(evt);
+            }
+        });
+
         txtPerso2.setText(" ");
+        txtPerso2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPerso2KeyTyped(evt);
+            }
+        });
+
+        txtPerso3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPerso3KeyTyped(evt);
+            }
+        });
 
         cmdCalcular.setText("Calcular");
         cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -60,17 +81,31 @@ public class EjercicioN1 extends javax.swing.JFrame {
             }
         });
 
+        txtPorce1.setEditable(false);
+
         jLabel4.setText("Porcentaje");
 
         jLabel5.setText("Porcentaje");
 
         jLabel6.setText("Porcentaje");
 
+        txtPorce2.setEditable(false);
+
+        txtPorce3.setEditable(false);
+
         jLabel7.setText("Total");
 
+        txtTotalC.setEditable(false);
         txtTotalC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalCActionPerformed(evt);
+            }
+        });
+
+        cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
             }
         });
 
@@ -81,14 +116,15 @@ public class EjercicioN1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdCalcular)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtPerso1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtPorce1))
+                    .addComponent(cmdCalcular))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPerso1)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtPorce1))
-                        .addGap(49, 49, 49)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtPerso2)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -103,7 +139,8 @@ public class EjercicioN1 extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTotalC)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)))
+                    .addComponent(cmdBorrar))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -132,7 +169,9 @@ public class EjercicioN1 extends javax.swing.JFrame {
                     .addComponent(txtPorce2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorce3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63)
-                .addComponent(cmdCalcular)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdCalcular)
+                    .addComponent(cmdBorrar))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
@@ -158,6 +197,17 @@ public class EjercicioN1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String res, res1, res2, res3;
         double p1, p2, p3, total, porce1=0, porce2=0, porce3=0;
+        if (txtPerso1.getText().trim().isEmpty()) {
+             JOptionPane.showMessageDialog(this, "Digite por favor Persona 1", "Error", JOptionPane.ERROR_MESSAGE);
+             txtPerso1.requestFocusInWindow();
+         } else if (txtPerso2.getText().trim().isEmpty()) {
+             JOptionPane.showMessageDialog(this, "Digite por favor Persona 2", "Error", JOptionPane.ERROR_MESSAGE);
+             txtPerso2.requestFocusInWindow();
+             
+         } else if (txtPerso3.getText().trim().isEmpty()) {
+             JOptionPane.showMessageDialog(this, "Digite por favor Persona 3", "Error", JOptionPane.ERROR_MESSAGE);
+             txtPerso3.requestFocusInWindow();    
+         } else {
         
         p1 = Double.parseDouble(txtPerso1.getText());
         p2 = Double.parseDouble(txtPerso2.getText());
@@ -179,8 +229,51 @@ public class EjercicioN1 extends javax.swing.JFrame {
         txtPorce1.setText(res1);
         txtPorce2.setText(res2);
         txtPorce3.setText(res3);
+         }
         
     }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        // TODO add your handling code here:
+        txtPorce1.setText("");
+        txtPorce2.setText("");
+        txtPorce3.setText("");
+        txtPerso1.setText("");
+        txtPerso2.setText("");
+        txtPerso3.setText(""); 
+        txtTotalC.setText("");
+        txtPerso1.requestFocusInWindow();
+        
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void txtPerso1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPerso1KeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+         if (!Character.isDigit(c)) {
+              getToolkit().beep();
+              evt.consume();
+ }
+    }//GEN-LAST:event_txtPerso1KeyTyped
+
+    private void txtPerso2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPerso2KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+         if (!Character.isDigit(c)) {
+              getToolkit().beep();
+              evt.consume();
+    }
+        
+    }//GEN-LAST:event_txtPerso2KeyTyped
+
+    private void txtPerso3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPerso3KeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+         if (!Character.isDigit(c)) {
+              getToolkit().beep();
+              evt.consume();
+    }
+        
+    }//GEN-LAST:event_txtPerso3KeyTyped
 
     /**
      * @param args the command line arguments
@@ -218,6 +311,7 @@ public class EjercicioN1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBorrar;
     private javax.swing.JButton cmdCalcular;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
